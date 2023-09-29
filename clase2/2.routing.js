@@ -28,6 +28,7 @@ const processRequest = (req, res) => {
                             const data = JSON.parse(body)
                             // llamar a una base de datos para guardar la info
                             res.writeHead(201, { 'Content-Type': 'application/son; charset=utf-8' })
+                            data.datetime = Date.now()
                             res.end(JSON.stringify(data))
                         })
                         //escuchar el evento data

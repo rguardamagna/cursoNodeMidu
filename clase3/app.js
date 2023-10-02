@@ -6,9 +6,35 @@ const cors = require('cors')
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: (origin, callback) => {
+    const ACCEPTED_ORIGINS = [
+      'http://127.0.0.1:5500'
+    ]
+
+    if (ACCEPTED_ORIGINS.includes(origin)) {
+      return callback(null, true)
+    }
+    if (!origin) {
+      return callback(null, true)
+    }
+
+    return callback(new Error('Not alloweb by CORS'))
+  }
+}))
 
 app.disable('x-powered-by')
+
+app.get('/movies', (req, res) => {
+  const { genre } = req.query
+  if (genre) {
+    const filteredMovies = movies.filter(
+      movie => movie.genre.some(g => g.toLowerCase() === genre.toLowerCase())
+    )
+    return res.json(filteredMovies)
+  }
+  res.status(201).json(movies)
+})
 
 app.get('/movies/:id', (req, res) => { // path-to-regex
   const { id } = req.params

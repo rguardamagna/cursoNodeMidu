@@ -30,7 +30,8 @@ Content-Type: application/json
 
 ### Actualizar una pelicula
 
-PATCH http://localhost:1235/movies/5ad1a235-0d9c-410a-b32b-220d91689a08
+PATCH http://localhost:1234/movies/e90d7b8d-d62f-4712-a725-80fe402286aa
+
 Content-Type: application/json
 
 {
